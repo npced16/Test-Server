@@ -1,0 +1,647 @@
+{
+  "createPost": {
+    "openapi": "/api/posts",
+    "method": "post",
+    "security": [
+      {
+        "Authorization": []
+      }
+    ],
+    "tags": ["Post Controller"],
+    "summary": "Create a new post",
+    "parameters": [
+      {
+        "in": "query",
+        "name": "title",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "in": "query",
+        "name": "description",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "in": "query",
+        "name": "tier",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "nullable": true
+        }
+      },
+      {
+        "in": "query",
+        "name": "media",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      {
+        "in": "query",
+        "name": "documents",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      {
+        "in": "query",
+        "name": "type",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": ["Normal", "Meal", "MealPlan", "Workout", "Recipe", "Programme"],
+          "default": "Normal"
+        }
+      },
+      {
+        "in": "query",
+        "name": "meal",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "nullable": true
+        }
+      },
+      {
+        "in": "query",
+        "name": "ingredients",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      {
+        "in": "query",
+        "name": "publishingOptions",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "in": "query",
+        "name": "allowComments",
+        "required": false,
+        "schema": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      {
+        "in": "query",
+        "name": "dietaryOptions",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      {
+        "in": "query",
+        "name": "timeToMake",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "in": "query",
+        "name": "calories",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "in": "query",
+        "name": "servingSize",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "in": "query",
+        "name": "stepByStep",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      {
+        "in": "query",
+        "name": "nutritionalFacts",
+        "required": false,
+        "schema": {
+          "type": "array"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Post created successfully",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "responseTime": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "responseMessage": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "post": {
+                      "$ref": "#/components/schemas/Post"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Server Error"
+      }
+    }
+  },
+  "getPostById": {
+    "openapi": "/api/posts/{id}",
+    "method": "get",
+    "tags": ["Post Controller"],
+    "summary": "Get Post By ID !! The meal / meanPlan are populated, not referenced by id",
+    "parameters": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Ok",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Post"
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Unauthorized"
+      },
+      "500": {
+        "description": "Server Error"
+      }
+    }
+  },
+  "updatePost": {
+    "openapi": "/api/posts/{id}",
+    "method": "put",
+    "security": [
+      {
+        "Authorization": []
+      }
+    ],
+    "tags": ["Post Controller"],
+    "summary": "Update Post",
+    "parameters": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/Post"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Ok",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Post"
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Unauthorized"
+      },
+      "500": {
+        "description": "Server Error"
+      }
+    }
+  },
+  "likePost": {
+    "openapi": "/api/posts/{id}/like",
+    "method": "post",
+    "security": [
+      {
+        "Authorization": []
+      }
+    ],
+    "tags": ["Post Controller"],
+    "summary": "Like Post",
+    "parameters": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Ok",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Post"
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Unauthorized"
+      },
+      "500": {
+        "description": "Server Error"
+      }
+    }
+  },
+  "unlikePost": {
+    "openapi": "/api/posts/{id}/unlike",
+    "method": "post",
+    "security": [
+      {
+        "Authorization": []
+      }
+    ],
+    "tags": ["Post Controller"],
+    "summary": "Unlike Post",
+    "parameters": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Ok",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Post"
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Unauthorized"
+      },
+      "500": {
+        "description": "Server Error"
+      }
+    }
+  },
+  "createComment": {
+    "openapi": "/api/posts/{id}/comment",
+    "method": "post",
+    "security": [
+      {
+        "Authorization": []
+      }
+    ],
+    "tags": ["Post Controller"],
+    "summary": "Create Comment",
+    "parameters": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "in": "query",
+        "name": "repliedTo",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/Comment"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Ok",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Comment"
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Unauthorized"
+      },
+      "500": {
+        "description": "Server Error"
+      }
+    }
+  },
+  "getLikedPosts": {
+    "openapi": "/api/posts/liked-posts",
+    "method": "get",
+    "security": [
+      {
+        "Authorization": []
+      }
+    ],
+    "tags": ["Post Controller"],
+    "summary": "Get Liked Posts",
+    "responses": {
+      "200": {
+        "description": "Ok",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Unauthorized"
+      },
+      "500": {
+        "description": "Server Error"
+      }
+    }
+  },
+  "getFeed": {
+    "openapi": "/api/posts/feed",
+    "method": "get",
+    "tags": ["Post Controller"],
+    "summary": "Get Feed",
+    "parameters": [
+      {
+        "in": "query",
+        "name": "limit",
+        "required": false,
+        "schema": {
+          "type": "number",
+          "default": 25
+        }
+      },
+      {
+        "in": "query",
+        "name": "skip",
+        "required": false,
+        "schema": {
+          "type": "number",
+          "default": 0
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Ok",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "post": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/Post"
+                  },
+                  "locked": {
+                    "type": "boolean"
+                  },
+                  "userHandle": {
+                    "type": "string"
+                  },
+                  "userProfilePicture": {
+                    "type": "string"
+                  },
+                  "userRole": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Server Error"
+      }
+    }
+  },
+  "getComments": {
+    "openapi": "/api/posts/{id}/comments",
+    "method": "get",
+    "tags": ["Post Controller"],
+    "summary": "Get Comments",
+    "parameters": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "in": "query",
+        "name": "limit",
+        "required": false,
+        "schema": {
+          "type": "number",
+          "default": 25
+        }
+      },
+      {
+        "in": "query",
+        "name": "skip",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Ok",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "comment": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/Comment"
+                  },
+                  "userHandle": {
+                    "type": "string"
+                  },
+                  "userProfilePicture": {
+                    "type": "string"
+                  },
+                  "userRole": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Server Error"
+      }
+    }
+  },
+  "getReplies": {
+    "openapi": "/api/posts/{id}/comments/{commId}/replies",
+    "method": "get",
+    "tags": ["Post Controller"],
+    "summary": "Get Replies",
+    "parameters": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "in": "path",
+        "name": "commId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "in": "query",
+        "name": "limit",
+        "required": false,
+        "schema": {
+          "type": "number",
+          "default": 25
+        }
+      },
+      {
+        "in": "query",
+        "name": "skip",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Ok",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "comment": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/Comment"
+                  },
+                  "userHandle": {
+                    "type": "string"
+                  },
+                  "userProfilePicture": {
+                    "type": "string"
+                  },
+                  "userRole": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Server Error"
+      }
+    }
+  }
+}
