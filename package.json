@@ -33,7 +33,7 @@
     "redis": "^4.6.13",
     "redis-om": "^0.4.3",
     "request": "^2.88.2",
-    "sharp": "^0.33.4",
+    "sharp": "^0.33.5",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0"
   }

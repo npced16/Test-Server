@@ -1,0 +1,64 @@
+version: "3.8"
+services:
+  app:
+    build: .
+    container_name: onlyplans
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+      - minio
+    environment:
+      PORT: 8080
+      DATABASE_URI: mongodb://mongo:27017/onlyplans
+      JWT_SECRET: SECUREPASSWORD
+      GCLOUD_STORAGE_BUCKET: my-bucket
+      GCLOUD_STORAGE_ENDPOINT: http://minio:9000
+      GCLOUD_STORAGE_ACCESS_KEY: minioadmin
+      GCLOUD_STORAGE_SECRET_KEY: minioadmin
+    volumes:
+      - .:/usr/src/app
+    command: ["node", "index.js"]
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo_db
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  minio:
+    image: minio/minio
+    container_name: minio_storage
+    restart: always
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server --console-address ":9001" /data
+    volumes:
+      - minio_data:/data
+
+  minio-create-bucket:
+    image: minio/mc
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      echo 'Setting alias...';
+      /usr/bin/mc alias set local http://minio:9000 minioadmin minioadmin;
+      echo 'Waiting for MinIO to start...';
+      while ! /usr/bin/mc admin info local >/dev/null 2>&1; do sleep 1; done;
+      echo 'MinIO is up! Creating bucket...';
+      /usr/bin/mc mb local/my-bucket;
+      /usr/bin/mc policy set public local/my-bucket;
+      exit 0;
+      "
+
+volumes:
+  mongo_data:
+  minio_data:
