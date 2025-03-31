@@ -1,6 +1,9 @@
 const router = require("express").Router();
 const { requireToken } = require("../middleware/token");
 const bucket = require("../storage/bucket");
+const crypto = require("crypto");
+const s3 = require("../storage/s3Client");
+const { PutObjectCommand } = require("@aws-sdk/client-s3");
 
 /**
  *
@@ -41,30 +44,43 @@ const bucket = require("../storage/bucket");
  *      500:
  *        description: Server Error
  */
-const uploadFile = (req, res, next) => {
+const uploadFile = async (req, res, next) => {
 	try {
 		const uuid = crypto.randomUUID();
-		if (!req.files) {
-			res.status(400).json({
+
+		if (!req.files || !req.files.image) {
+			return res.status(400).json({
 				responseTime: new Date().toISOString(),
 				responseMessage: "No file uploaded",
 				data: null,
 			});
-			return;
 		}
-		bucket.file(uuid).createWriteStream().end(req.files.image.data);
+
+		const file = req.files.image;
+
+		const params = {
+			Bucket: process.env.MINIO_BUCKET,
+			Key: uuid,
+			Body: file.data,
+			ContentType: file.mimetype,
+			ACL: "public-read",
+		};
+
+		await s3.send(new PutObjectCommand(params));
+
 		res.json({
 			responseTime: new Date().toISOString(),
 			responseMessage: "success",
 			data: {
-				url: `https://storage.googleapis.com/${bucket.name}/${uuid}`,
+				url: `${process.env.PUBLIC_STORAGE_URL}/${uuid}`,
 			},
 		});
 	} catch (err) {
-		console.log(err);
+		console.error(err);
 		next(err);
 	}
 };
+
 
 router.post("/upload", requireToken, uploadFile);
 

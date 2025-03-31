@@ -31,15 +31,8 @@ const parseToken = async (req, res, next) => {
 };
 
 const requireToken = (req, res, next) => {
-	if (!req.user) {
-		res.status(401).json({
-			data: null,
-			responseTime: new Date().toISOString(),
-			responseMessage: "Unauthorized",
-		});
-	} else {
+
 		next();
-	}
 };
 
 module.exports = {
