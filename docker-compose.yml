@@ -58,13 +58,13 @@ services:
         sleep 2;
       done;
 
-      echo '✅ MinIO is ready. Creating bucket...';
+      echo 'MinIO is ready. Creating bucket...';
       /usr/bin/mc mb local/my-bucket || echo 'Bucket already exists';
 
-      echo '🔓 Setting public download policy...';
+      echo 'Setting public download policy...';
       /usr/bin/mc anonymous set download local/my-bucket;
 
-      echo '🏁 Bucket setup complete.';
+      echo 'Bucket setup complete.';
       exit 0;
       "
 
