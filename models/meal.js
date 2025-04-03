@@ -225,21 +225,23 @@ const MealSchema = new Schema(
 	}
 );
 
+const isValidURL = (url) => {
+	try {
+		new URL(url);
+		return true;
+	} catch (_) {
+		return false;
+	}
+};
+
 MealSchema.pre("save", async function (next) {
-	const bucketName = process.env.GCLOUD_STORAGE_BUCKET;
 	if (
-		this.media.some(
-			(media) =>
-				!media.startsWith(`https://storage.googleapis.com/${bucketName}`)
-		) ||
-		this.steps.some((step) =>
-			step.media.some(
-				(media) =>
-					!media.startsWith(`https://storage.googleapis.com/${bucketName}`)
-			)
-		)
-	)
+		this.media.some((media) => !isValidURL(media)) ||
+		this.steps.some((step) => step.media.some((media) => !isValidURL(media)))
+	) {
+		console.log(this.media)
 		throw new Error("Invalid Media URL");
+	}
 	next();
 });
 

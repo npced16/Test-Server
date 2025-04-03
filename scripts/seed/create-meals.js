@@ -153,15 +153,27 @@ const createPosts = async () => {
             }
             meal.dietaryOptions = [...new Set(meal.dietaryOptions)];
             // add a few steps
-            for(let k=0;k<2+Math.floor(Math.random() * 5);k++){
-                meal.steps.push({
-                    title:"Lorem ipsum dolor sit amet",
-                    descript:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                });
-                if(Math.random() > 0.5){
-                    meal.steps[meal.steps.length-1].media.push(dataImg.getRandomImage());
+            const stepCount = 2 + Math.floor(Math.random() * 5);
+            for (let k = 0; k < stepCount; k++) {
+                const step = {
+                    title: "Lorem ipsum dolor sit amet",
+                    descript: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    media: [],
+                };
+                if (Math.random() > 0.3) {
+                    const numImages = 1 + Math.floor(Math.random() * 2);
+                    for (let n = 0; n < numImages; n++) {
+                        step.media.push(dataImg.getRandomImage());
+                    }
                 }
+                meal.steps.push(step);
             }
+            // Add a few images
+            const mealMediaCount = 1 + Math.floor(Math.random() * 3);
+            for (let m = 0; m < mealMediaCount; m++) {
+                meal.media.push(dataImg.getRandomImage());
+            }
+            
 
             await meal.save();
             
