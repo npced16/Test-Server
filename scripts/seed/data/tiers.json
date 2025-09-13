@@ -1,0 +1,5 @@
+[
+  { "price": 5, "title": "Basic Recipes", "level": 1, "description": "Access to weekly recipes" },
+  { "price": 10, "title": "Meal Plans", "level": 2, "description": "Access to weekly meal plans" },
+  { "price": 20, "title": "1-on-1 Coaching", "level": 3, "description": "Personalized nutrition coaching" }
+]

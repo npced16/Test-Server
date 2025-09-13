@@ -1,0 +1,12 @@
+[
+  { "postTitle": "Avocado Toast", "userEmail": "emma.wilson@example.com", "message": "This looks amazing for breakfast!" },
+  { "postTitle": "Banana Protein Smoothie", "userEmail": "john.smith@example.com", "message": "Perfect post workout drink." },
+  { "postTitle": "Grilled Chicken Salad", "userEmail": "sofia.martin@example.com", "message": "Love this healthy option!" },
+  { "postTitle": "Oatmeal Bowl", "userEmail": "maria.garcia@example.com", "message": "I eat this every morning, delicious." },
+  { "postTitle": "Veggie Stir Fry", "userEmail": "liam.jones@example.com", "message": "Quick and healthy dinner idea." },
+  { "postTitle": "Turkey Wrap", "userEmail": "chris.taylor@example.com", "message": "Easy lunch for work." },
+  { "postTitle": "Salmon with Quinoa", "userEmail": "john.smith@example.com", "message": "High protein, I’ll try this!" },
+  { "postTitle": "Greek Yogurt Parfait", "userEmail": "emma.wilson@example.com", "message": "Looks yummy 😋" },
+  { "postTitle": "Egg Fried Rice", "userEmail": "alex.lee@example.com", "message": "This will save my weeknights!" },
+  { "postTitle": "Chia Pudding", "userEmail": "maria.garcia@example.com", "message": "Perfect for meal prep." }
+]

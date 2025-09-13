@@ -1,0 +1,12 @@
+[
+  { "postTitle": "Avocado Toast", "userEmail": "john.smith@example.com" },
+  { "postTitle": "Banana Protein Smoothie", "userEmail": "emma.wilson@example.com" },
+  { "postTitle": "Grilled Chicken Salad", "userEmail": "alex.lee@example.com" },
+  { "postTitle": "Oatmeal Bowl", "userEmail": "maria.garcia@example.com" },
+  { "postTitle": "Veggie Stir Fry", "userEmail": "chris.taylor@example.com" },
+  { "postTitle": "Turkey Wrap", "userEmail": "sofia.martin@example.com" },
+  { "postTitle": "Salmon with Quinoa", "userEmail": "liam.jones@example.com" },
+  { "postTitle": "Greek Yogurt Parfait", "userEmail": "john.smith@example.com" },
+  { "postTitle": "Egg Fried Rice", "userEmail": "emma.wilson@example.com" },
+  { "postTitle": "Chia Pudding", "userEmail": "alex.lee@example.com" }
+]

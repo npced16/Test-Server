@@ -57,6 +57,7 @@ const login = async (req, res, next) => {
 	try {
 		let { email, password } = req.body;
 		let user = await User.findOne({ email }).select("+password");
+		console.log(user);
 		if (!user || md5(password) !== user.password) {
 			return res.status(401).json({
 				responseMessage: "Wrong email/password combination",

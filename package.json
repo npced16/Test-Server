@@ -9,6 +9,7 @@
     "start": "node index.js",
     "setup-mongo-docker": "docker run --name mongodb -d -p 27017:27017 mongo",
     "start-mongo-docker": "docker start mongodb",
+    "seed-all": "node scripts/seed/seeder.js",
     "seed": "node scripts/seed/create-users.js && node scripts/seed/create-following.js  && node scripts/seed/upload-images && node scripts/seed/create-tiers.js && node scripts/seed/create-posts.js  && node scripts/seed/create-meals.js  && node scripts/seed/create-likes.js && node scripts/seed/create-subscribing.js && node scripts/seed/create-comments.js"
   },
   "keywords": [],

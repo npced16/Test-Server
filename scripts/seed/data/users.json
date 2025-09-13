@@ -1,0 +1,12 @@
+[
+  { "email": "jane.doe@example.com", "firstName": "Jane", "lastName": "Doe", "role": "Creator", "password": "098f6bcd4621d373cade4e832627b4f6", "verified": true, "bio": "Nutrition coach sharing healthy meals" },
+  { "email": "mark.green@example.com", "firstName": "Mark", "lastName": "Green", "role": "Creator", "password": "098f6bcd4621d373cade4e832627b4f6", "verified": true, "bio": "Fitness trainer with quick recipes" },
+  { "email": "lucy.brown@example.com", "firstName": "Lucy", "lastName": "Brown", "role": "Specialist", "password": "098f6bcd4621d373cade4e832627b4f6", "verified": true, "bio": "Dietician passionate about healthy eating" },
+  { "email": "john.smith@example.com", "firstName": "John", "lastName": "Smith", "role": "Consumer", "password": "098f6bcd4621d373cade4e832627b4f6", "verified": true, "bio": "Foodie trying new recipes" },
+  { "email": "emma.wilson@example.com", "firstName": "Emma", "lastName": "Wilson", "role": "Consumer", "password": "098f6bcd4621d373cade4e832627b4f6", "verified": true, "bio": "Busy mom looking for fast healthy food" },
+  { "email": "alex.lee@example.com", "firstName": "Alex", "lastName": "Lee", "role": "Consumer", "password": "098f6bcd4621d373cade4e832627b4f6", "verified": true, "bio": "College student learning to cook" },
+  { "email": "maria.garcia@example.com", "firstName": "Maria", "lastName": "Garcia", "role": "Consumer", "password": "098f6bcd4621d373cade4e832627b4f6", "verified": true, "bio": "Loves low-carb recipes" },
+  { "email": "chris.taylor@example.com", "firstName": "Chris", "lastName": "Taylor", "role": "Consumer", "password": "098f6bcd4621d373cade4e832627b4f6", "verified": true, "bio": "Looking for high-protein meals" },
+  { "email": "sofia.martin@example.com", "firstName": "Sofia", "lastName": "Martin", "role": "Consumer", "password": "098f6bcd4621d373cade4e832627b4f6", "verified": true, "bio": "Vegetarian lifestyle" },
+  { "email": "liam.jones@example.com", "firstName": "Liam", "lastName": "Jones", "role": "Consumer", "password": "098f6bcd4621d373cade4e832627b4f6", "verified": true, "bio": "Always hunting new snacks" }
+]

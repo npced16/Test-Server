@@ -1,0 +1,9 @@
+[
+  { "userEmail": "john.smith@example.com", "tiers": ["Basic Recipes", "Meal Plans"] },
+  { "userEmail": "emma.wilson@example.com", "tiers": ["Meal Plans"] },
+  { "userEmail": "alex.lee@example.com", "tiers": ["Basic Recipes"] },
+  { "userEmail": "maria.garcia@example.com", "tiers": ["Meal Plans", "1-on-1 Coaching"] },
+  { "userEmail": "chris.taylor@example.com", "tiers": ["Basic Recipes"] },
+  { "userEmail": "sofia.martin@example.com", "tiers": ["Meal Plans"] },
+  { "userEmail": "liam.jones@example.com", "tiers": ["Basic Recipes"] }
+]

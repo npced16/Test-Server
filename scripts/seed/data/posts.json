@@ -1,0 +1,327 @@
+[
+  {
+    "title": "Avocado Toast",
+    "description": "Classic avocado toast with olive oil and sesame seeds.",
+    "type": "Meal",
+    "meal": {
+      "title": "Avocado Toast",
+      "description": "Crispy toast topped with mashed avocado, olive oil, and sesame seeds.",
+      "mealType": "Breakfast",
+      "mealPrep": "Easy to make",
+      "timeToMake": "Under 15 minutes",
+      "ingredients": [
+        { "name": "Bread" },
+        { "name": "Avocado" },
+        { "name": "Olive Oil" },
+        { "name": "Sesame Seeds" }
+      ],
+      "servingSize": 1,
+      "servingUnit": "unit",
+      "notes": ["Best served fresh"],
+      "macros": [
+        { "name": "Fiber", "quantity": 5, "unit": "g" },
+        { "name": "Iron", "quantity": 2, "unit": "mg" }
+      ],
+      "kCal": 300,
+      "protein": 8,
+      "carbs": 30,
+      "fats": 15,
+      "steps": [
+        { "title": "Toast Bread", "descript": "Lightly toast the bread slices.", "media": ["avacado.jpg"] },
+        { "title": "Add Toppings", "descript": "Mash avocado, drizzle olive oil, sprinkle sesame seeds.", "media": ["avacado.jpg"] }
+      ],
+      "media": ["avacado.jpg"]
+    },
+    "media": ["avacado.jpg"]
+  },
+  {
+    "title": "Banana Protein Smoothie",
+    "description": "Banana, almond milk, and protein powder shake.",
+    "type": "Meal",
+    "meal": {
+      "title": "Banana Protein Smoothie",
+      "description": "Creamy smoothie perfect for post-workout recovery.",
+      "mealType": "Snack",
+      "mealPrep": "Few Ingredients",
+      "timeToMake": "Under 15 minutes",
+      "ingredients": [
+        { "name": "Banana" },
+        { "name": "Protein Powder" },
+        { "name": "Almond Milk" }
+      ],
+      "servingSize": 1,
+      "servingUnit": "cups",
+      "notes": ["Serve chilled"],
+      "macros": [
+        { "name": "VitB12", "quantity": 1, "unit": "mcg" },
+        { "name": "Calcium", "quantity": 200, "unit": "mg" }
+      ],
+      "kCal": 220,
+      "protein": 20,
+      "carbs": 25,
+      "fats": 5,
+      "steps": [
+        { "title": "Blend", "descript": "Blend banana, protein powder, and almond milk until smooth.", "media": [] }
+      ],
+      "media": []
+    }
+  },
+  {
+    "title": "Grilled Chicken Salad",
+    "description": "Chicken breast with fresh greens and vinaigrette.",
+    "type": "Meal",
+    "meal": {
+      "title": "Grilled Chicken Salad",
+      "description": "Light and filling salad with lean chicken and mixed greens.",
+      "mealType": "Lunch",
+      "mealPrep": "One-Pan / One-Bowl",
+      "timeToMake": "Under 30 minutes",
+      "ingredients": [
+        { "name": "Chicken Breast" },
+        { "name": "Lettuce" },
+        { "name": "Tomatoes" }
+      ],
+      "servingSize": 1,
+      "servingUnit": "unit",
+      "notes": ["Use fresh chicken for best flavor"],
+      "macros": [
+        { "name": "VitC", "quantity": 20, "unit": "mg" },
+        { "name": "Iron", "quantity": 3, "unit": "mg" }
+      ],
+      "kCal": 400,
+      "protein": 35,
+      "carbs": 10,
+      "fats": 12,
+      "steps": [
+        { "title": "Grill Chicken", "descript": "Cook chicken breast until fully done.", "media": [] },
+        { "title": "Assemble Salad", "descript": "Combine greens, tomatoes, and sliced chicken.", "media": [] }
+      ],
+      "media": []
+    }
+  },
+  {
+    "title": "Oatmeal Bowl",
+    "description": "Warm oatmeal with fruits and nuts.",
+    "type": "Meal",
+    "meal": {
+      "title": "Oatmeal Bowl",
+      "description": "Hearty oats cooked with milk, topped with fresh fruit and nuts.",
+      "mealType": "Breakfast",
+      "mealPrep": "One-Pan / One-Bowl",
+      "timeToMake": "Under 15 minutes",
+      "ingredients": [
+        { "name": "Oats" },
+        { "name": "Milk" },
+        { "name": "Berries" }
+      ],
+      "servingSize": 1,
+      "servingUnit": "unit",
+      "notes": ["Add honey for sweetness"],
+      "macros": [
+        { "name": "Fiber", "quantity": 8, "unit": "g" },
+        { "name": "Iron", "quantity": 3, "unit": "mg" }
+      ],
+      "kCal": 350,
+      "protein": 12,
+      "carbs": 50,
+      "fats": 7,
+      "steps": [
+        { "title": "Cook Oats", "descript": "Boil oats with milk until thickened.", "media": [] },
+        { "title": "Top & Serve", "descript": "Add berries and nuts on top.", "media": [] }
+      ],
+      "media": []
+    }
+  },
+  {
+    "title": "Veggie Stir Fry",
+    "description": "Colorful vegetables sautéed with soy sauce.",
+    "type": "Meal",
+    "meal": {
+      "title": "Veggie Stir Fry",
+      "description": "Quick stir fry with mixed vegetables and soy sauce.",
+      "mealType": "Dinner",
+      "mealPrep": "One-Pan / One-Bowl",
+      "timeToMake": "Under 30 minutes",
+      "ingredients": [
+        { "name": "Broccoli" },
+        { "name": "Carrots" },
+        { "name": "Soy Sauce" }
+      ],
+      "servingSize": 1,
+      "servingUnit": "g",
+      "notes": ["Serve with rice or noodles"],
+      "macros": [
+        { "name": "VitA", "quantity": 400, "unit": "IU" },
+        { "name": "Fiber", "quantity": 6, "unit": "g" }
+      ],
+      "kCal": 250,
+      "protein": 8,
+      "carbs": 30,
+      "fats": 9,
+      "steps": [
+        { "title": "Stir Fry Veggies", "descript": "Cook vegetables in hot pan with soy sauce.", "media": [] }
+      ],
+      "media": []
+    }
+  },
+  {
+    "title": "Turkey g",
+    "description": "Whole wheat g with turkey and veggies.",
+    "type": "Meal",
+    "meal": {
+      "title": "Turkey g",
+      "description": "Nutritious g packed with lean turkey and greens.",
+      "mealType": "Lunch",
+      "mealPrep": "Few Ingredients",
+      "timeToMake": "Under 15 minutes",
+      "ingredients": [
+        { "name": "Whole Wheat g" },
+        { "name": "Turkey" },
+        { "name": "Spinach" }
+      ],
+      "servingSize": 1,
+      "servingUnit": "g",
+      "notes": ["Roll tightly before serving"],
+      "macros": [
+        { "name": "Fiber", "quantity": 2, "unit": "g" }
+      ],
+      "kCal": 280,
+      "protein": 25,
+      "carbs": 28,
+      "fats": 9,
+      "steps": [
+        { "title": "Assemble g", "descript": "Layer turkey and veggies in g, fold, and serve.", "media": [] }
+      ],
+      "media": []
+    }
+  },
+  {
+    "title": "Salmon with Quinoa",
+    "description": "Grilled salmon served with quinoa and asparagus.",
+    "type": "Meal",
+    "meal": {
+      "title": "Salmon with Quinoa",
+      "description": "High-protein salmon dish with quinoa and asparagus.",
+      "mealType": "Dinner",
+      "mealPrep": "One-Sheet Pan",
+      "timeToMake": "Under 45 minutes",
+      "ingredients": [
+        { "name": "Salmon" },
+        { "name": "Quinoa" },
+        { "name": "Asparagus" }
+      ],
+      "servingSize": 1,
+      "servingUnit": "g",
+      "notes": ["Squeeze lemon before serving"],
+      "macros": [
+        { "name": "Iron", "quantity": 2, "unit": "mg" },
+        { "name": "VitB12", "quantity": 2, "unit": "mcg" }
+      ],
+      "kCal": 500,
+      "protein": 40,
+      "carbs": 30,
+      "fats": 20,
+      "steps": [
+        { "title": "Cook Quinoa", "descript": "Boil quinoa until fluffy.", "media": [] },
+        { "title": "Grill Salmon", "descript": "Grill salmon fillet with seasoning.", "media": [] }
+      ],
+      "media": []
+    }
+  },
+  {
+    "title": "Greek Yogurt Parfait",
+    "description": "Layered yogurt with granola and berries.",
+    "type": "Meal",
+    "meal": {
+      "title": "Greek Yogurt Parfait",
+      "description": "Refreshing parfait with yogurt, granola, and fruit.",
+      "mealType": "Snack",
+      "mealPrep": "No-Bake",
+      "timeToMake": "Under 15 minutes",
+      "ingredients": [
+        { "name": "Greek Yogurt" },
+        { "name": "Granola" },
+        { "name": "Strawberries" }
+      ],
+      "servingSize": 1,
+      "servingUnit": "cups",
+      "notes": ["Layer nicely for presentation"],
+      "macros": [
+        { "name": "Calcium", "quantity": 150, "unit": "mg" }
+      ],
+      "kCal": 200,
+      "protein": 12,
+      "carbs": 30,
+      "fats": 6,
+      "steps": [
+        { "title": "Layer Ingredients", "descript": "Alternate layers of yogurt, granola, and fruit.", "media": [] }
+      ],
+      "media": []
+    }
+  },
+  {
+    "title": "Egg Fried Rice",
+    "description": "Simple fried rice with eggs and peas.",
+    "type": "Meal",
+    "meal": {
+      "title": "Egg Fried Rice",
+      "description": "Quick fried rice with scrambled eggs and peas.",
+      "mealType": "Dinner",
+      "mealPrep": "One-Pan / One-Bowl",
+      "timeToMake": "Under 30 minutes",
+      "ingredients": [
+        { "name": "Rice" },
+        { "name": "Eggs" },
+        { "name": "Peas" }
+      ],
+      "servingSize": 1,
+      "servingUnit": "unit",
+      "notes": ["Best with leftover rice"],
+      "macros": [
+        { "name": "Fiber", "quantity": 4, "unit": "g" }
+      ],
+      "kCal": 350,
+      "protein": 15,
+      "carbs": 50,
+      "fats": 10,
+      "steps": [
+        { "title": "Cook Eggs", "descript": "Scramble eggs in pan.", "media": [] },
+        { "title": "Fry Rice", "descript": "Add rice and peas, stir fry together.", "media": [] }
+      ],
+      "media": []
+    }
+  },
+  {
+    "title": "Chia Pudding",
+    "description": "Chia seeds soaked in almond milk with fruit topping.",
+    "type": "Meal",
+    "meal": {
+      "title": "Chia Pudding",
+      "description": "Overnight chia pudding topped with fresh fruit.",
+      "mealType": "Breakfast",
+      "mealPrep": "No-Bake",
+      "timeToMake": "Over 1 hour",
+      "ingredients": [
+        { "name": "Chia Seeds" },
+        { "name": "Almond Milk" },
+        { "name": "Blueberries" }
+      ],
+      "servingSize": 1,
+      "servingUnit": "cups",
+      "notes": ["Refrigerate overnight"],
+      "macros": [
+        { "name": "Fiber", "quantity": 10, "unit": "g" },
+        { "name": "Calcium", "quantity": 180, "unit": "mg" }
+      ],
+      "kCal": 250,
+      "protein": 8,
+      "carbs": 20,
+      "fats": 12,
+      "steps": [
+        { "title": "Mix Ingredients", "descript": "Stir chia seeds into almond milk.", "media": [] },
+        { "title": "Refrigerate", "descript": "Chill for 6+ hours until pudding sets.", "media": [] }
+      ],
+      "media": []
+    }
+  }
+]
