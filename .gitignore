@@ -3,3 +3,4 @@ uploads
 .env
 key.json
 /scripts/seed/images.json
+.DS_Store

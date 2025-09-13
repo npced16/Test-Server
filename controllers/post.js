@@ -242,46 +242,74 @@ const createPost = async (req, res) => {
  */
 
 const getPostById = async (req, res, next) => {
-	try {
-		let post = await Post.findById(req.params.id)
-			.populate("meal")
-			.populate("mealPlan");
+  try {
+    let post = await Post.findById(req.params.id)
+      .populate("meal")
+      .populate("mealPlan")
+      .populate("creator"); // helpful to expose handle, role, etc.
 
-		if (post) {
-			if (post.tier && !req.user) {
-				meal = post.meal.toObject();
-				meal = {
-					...meal,
-					ingredients: [],
-					steps: [],
-				};
-				post = {
-					...post.toObject(),
-					meal,
-				};
-			}
-			console.log("post", post);
-			res.json({
-				responseTime: new Date().toISOString(),
-				responseMessage: "getPostById successfully",
-				data: { post },
-			});
-		} else
-			res.status(404).json({
-				responseTime: new Date().toISOString(),
-				responseMessage: "Post not found",
-				data: {},
-			});
-	} catch (err) {
-		res.status(401).json({
-			responseTime: new Date().toISOString(),
-			responseMessage: err,
-			data: null,
-		});
-		console.log(err);
-		next(err);
-	}
+    if (!post) {
+      return res.status(404).json({
+        responseTime: new Date().toISOString(),
+        responseMessage: "Post not found",
+        data: {},
+      });
+    }
+
+    let postObj = post.toObject();
+
+    // Lock meal if tiered and user not logged in
+    if (postObj.tier && !req.user) {
+      if (postObj.meal) {
+        postObj.meal = {
+          ...postObj.meal.toObject(),
+          ingredients: [],
+          steps: [],
+        };
+      }
+    }
+
+    // Count likes and comments
+    const [likesCount, commentCount] = await Promise.all([
+      Like.countDocuments({ postId: post._id }),
+      Comment.countDocuments({ postId: post._id }),
+    ]);
+
+    // If user is logged in, check if they liked the post
+    let userHasLiked = false;
+    if (req.user) {
+      userHasLiked = await Like.exists({
+        postId: post._id,
+        likedBy: req.user._id,
+      });
+    }
+
+    res.json({
+      responseTime: new Date().toISOString(),
+      responseMessage: "getPostById successfully",
+      data: {
+        post: {
+          ...postObj,
+          likesCount,
+          commentCount,
+          userHasLiked: !!userHasLiked,
+          userHandle: post.creator?.handle || null,
+          userProfilePicture: post.creator?.profilePicture || null,
+          userRole: post.creator?.role || null,
+        },
+      },
+    });
+  } catch (err) {
+    res.status(500).json({
+      responseTime: new Date().toISOString(),
+      responseMessage: err.message,
+      data: null,
+    });
+    console.error(err);
+    next(err);
+  }
 };
+
 
 /**
  *
@@ -662,78 +690,72 @@ const getLikedPosts = async (req, res, next) => {
  *        description: Server Error
  */
 const getFeed = async (req, res, next) => {
-	try {
-		let posts = [];
-		let limit = req.query.limit || 25;
-		let skip = req.query.skip || 0;
-		if (!req.user) {
-			posts = [
-				...(await Post.find({ tier: null })
-					.sort({ date: -1 })
-					.limit(limit / 2 + (limit % 2))
-					.skip(skip / 2 + (skip % 2))
-					.populate("creator")),
-				...(await Post.find({ tier: { $ne: null } })
-					.sort({ date: -1 })
-					.limit(limit / 2 + (limit % 2))
-					.skip(skip / 2 + (skip % 2))
-					.populate("creator")),
-			];
-			posts = posts
-				.map((post) => post.toObject())
-				.map((post) => {
-					let ret = post;
-					let user = post.creator;
-					post.creator = user._id;
-					console.log(user, post.creator);
-					return {
-						post: ret,
-						locked: !!post.tier,
-						userHandle: user.handle,
-						userProfilePicture: user.profilePicture,
-						userRole: user.role,
-					};
-				});
-		} else {
-			posts = [
-				...(await Post.find({ tier: null })
-					.sort({ date: -1 })
-					.limit(limit / 2 + (limit % 2))
-					.skip(skip / 2 + (skip % 2))
-					.populate("creator")),
-				...(await Post.find({ tier: { $ne: null } })
-					.sort({ date: -1 })
-					.limit(limit / 2 + (limit % 2))
-					.skip(skip / 2 + (skip % 2))
-					.populate("creator")),
-			];
-			posts = posts
-				.map((post) => post.toObject())
-				.map((post) => {
-					let ret = post;
-					let user = post.creator;
-					post.creator = user._id;
-					console.log(user, post.creator);
-					return {
-						post: ret,
-						locked: !!post.tier,
-						userHandle: user.handle,
-						userProfilePicture: user.profilePicture,
-						// userIsVerified: user.isVerified,
-						userRole: user.role,
-					};
-				});
-		}
-		res.json({
-			responseTime: new Date().toISOString(),
-			responseMessage: "getFeed successfully",
-			data: { posts },
-		});
-	} catch (err) {
-		console.log(err);
-		next(err);
-	}
+  try {
+    let limit = parseInt(req.query.limit) || 25;
+    let skip = parseInt(req.query.skip) || 0;
+
+    // Fetch posts
+    let posts = [
+      ...(await Post.find({ tier: null })
+        .sort({ date: -1 })
+        .limit(Math.ceil(limit / 2))
+        .skip(Math.floor(skip / 2))
+        .populate("creator")),
+      ...(await Post.find({ tier: { $ne: null } })
+        .sort({ date: -1 })
+        .limit(Math.floor(limit / 2))
+        .skip(Math.floor(skip / 2))
+        .populate("creator")),
+    ];
+
+    // Convert to plain objects
+    posts = posts.map(p => p.toObject());
+
+    // Collect postIds
+    const postIds = posts.map(p => p._id);
+
+    // Bulk counts
+    const likeCounts = await Like.aggregate([
+      { $match: { postId: { $in: postIds } } },
+      { $group: { _id: "$postId", count: { $sum: 1 } } }
+    ]);
+    const commentCounts = await Comment.aggregate([
+      { $match: { postId: { $in: postIds } } },
+      { $group: { _id: "$postId", count: { $sum: 1 } } }
+    ]);
+
+    const likeCountMap = Object.fromEntries(likeCounts.map(l => [l._id.toString(), l.count]));
+    const commentCountMap = Object.fromEntries(commentCounts.map(c => [c._id.toString(), c.count]));
+
+    // Shape response
+    const result = posts.map(post => {
+      let user = post.creator;
+      post.creator = user._id;
+
+      return {
+        post: {
+          ...post,
+          likesCount: likeCountMap[post._id.toString()] || 0,
+          commentCount: commentCountMap[post._id.toString()] || 0,
+        },
+        locked: !!post.tier,
+        userHandle: user.handle,
+        userProfilePicture: user.profilePicture,
+        userRole: user.role,
+      };
+    });
+
+    res.json({
+      responseTime: new Date().toISOString(),
+      responseMessage: "getFeed successfully",
+      data: { posts: result },
+    });
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
 };
+
 
 /**
  *
