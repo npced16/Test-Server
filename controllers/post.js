@@ -138,78 +138,78 @@ const { exceptRoles } = require("../middleware/roles");
  *        description: Server Error
  */
 const createPost = async (req, res) => {
-	const {
-		title,
-		tier = null,
-		// isVerified = true,
-		description,
-		media = [],
-		documents = [],
-		type = "Normal",
-		meal = null,
-		mealPlan = null,
-		aspectRatio = "square",
-		ingredients = [],
-		publishingOptions,
-		allowComments = true,
-		dietaryOptions = [],
-		timeToMake,
-		calories,
-		servingSize,
-		stepByStep = [],
-		nutritionalFacts = {},
-	} = req.query;
-	if (!title) {
-		return res.status(400).json({
-			responseTime: new Date().toISOString(),
-			responseMessage: "Title is required.",
-			data: null,
-		});
-	}
-	const post = new Post({
-		title,
-		creator: req.user._id || null,
-		tier,
-		// isVerified,
-		description,
-		media: Array.isArray(media) ? media : [media],
-		documents: Array.isArray(documents) ? documents : [documents],
-		date: new Date(),
-		type,
-		meal,
-		mealPlan,
-		aspectRatio,
-		ingredients: Array.isArray(ingredients) ? ingredients : [ingredients],
-		publishingOptions,
-		allowComments,
-		dietaryOptions: Array.isArray(dietaryOptions)
-			? dietaryOptions
-			: [dietaryOptions],
-		timeToMake,
-		calories,
-		servingSize,
-		stepByStep: Array.isArray(stepByStep) ? stepByStep : [stepByStep],
-		nutritionalFacts:
-			typeof nutritionalFacts === "object" ? nutritionalFacts : {},
-	});
+  const {
+    title,
+    tier = null,
+    // isVerified = true,
+    description,
+    media = [],
+    documents = [],
+    type = "Normal",
+    meal = null,
+    mealPlan = null,
+    aspectRatio = "square",
+    ingredients = [],
+    publishingOptions,
+    allowComments = true,
+    dietaryOptions = [],
+    timeToMake,
+    calories,
+    servingSize,
+    stepByStep = [],
+    nutritionalFacts = {},
+  } = req.query;
+  if (!title) {
+    return res.status(400).json({
+      responseTime: new Date().toISOString(),
+      responseMessage: "Title is required.",
+      data: null,
+    });
+  }
+  const post = new Post({
+    title,
+    creator: req.user._id || null,
+    tier,
+    // isVerified,
+    description,
+    media: Array.isArray(media) ? media : [media],
+    documents: Array.isArray(documents) ? documents : [documents],
+    date: new Date(),
+    type,
+    meal,
+    mealPlan,
+    aspectRatio,
+    ingredients: Array.isArray(ingredients) ? ingredients : [ingredients],
+    publishingOptions,
+    allowComments,
+    dietaryOptions: Array.isArray(dietaryOptions)
+      ? dietaryOptions
+      : [dietaryOptions],
+    timeToMake,
+    calories,
+    servingSize,
+    stepByStep: Array.isArray(stepByStep) ? stepByStep : [stepByStep],
+    nutritionalFacts:
+      typeof nutritionalFacts === "object" ? nutritionalFacts : {},
+  });
 
-	try {
-		await post.save();
-		const responsePost = post.toObject();
-		delete responsePost.mealPlan;
-		delete responsePost.aspectRatio;
-		res.json({
-			responseTime: new Date().toISOString(),
-			responseMessage: "createPost successfully",
-			data: { post: responsePost },
-		});
-	} catch (err) {
-		res.status(500).json({
-			responseTime: new Date().toISOString(),
-			responseMessage: err.message || "Internal Server Error",
-			data: null,
-		});
-	}
+  try {
+    await post.save();
+    const responsePost = post.toObject();
+    delete responsePost.mealPlan;
+    delete responsePost.aspectRatio;
+    res.json({
+      responseTime: new Date().toISOString(),
+      responseMessage: "createPost successfully",
+      data: { post: responsePost },
+    });
+  } catch (err) {
+    res.status(500).json({
+      responseTime: new Date().toISOString(),
+      responseMessage: err.message || "Internal Server Error",
+      data: null,
+    });
+  }
 };
 
 /**
@@ -310,7 +310,6 @@ const getPostById = async (req, res, next) => {
   }
 };
 
-
 /**
  *
  * @param {express.Request} req
@@ -349,34 +348,34 @@ const getPostById = async (req, res, next) => {
  *        description: Server Error
  */
 const updatePost = async (req, res, next) => {
-	try {
-		let body = req.body;
-		let newPost = new Post(body).toObject();
-		delete newPost.creator;
-		delete newPost._id;
-		delete newPost.date;
-		// delete newPost.commentCount;
-		// delete newPost.likedCount;
-		let post = await Post.findOneAndUpdate(
-			{ creator: req.user._id, _id: req.params.id },
-			newPost,
-			{ returnOriginal: false, runValidators: true }
-		);
-		if (!post)
-			res.status(500).json({
-				responseTime: new Date().toISOString(),
-				responseMessage: "Post not found / Unauthorized",
-				data: {},
-			});
-		else
-			res.json({
-				responseTime: new Date().toISOString(),
-				responseMessage: "updatePost successfully",
-				data: { post },
-			});
-	} catch (err) {
-		next(err);
-	}
+  try {
+    let body = req.body;
+    let newPost = new Post(body).toObject();
+    delete newPost.creator;
+    delete newPost._id;
+    delete newPost.date;
+    // delete newPost.commentCount;
+    // delete newPost.likedCount;
+    let post = await Post.findOneAndUpdate(
+      { creator: req.user._id, _id: req.params.id },
+      newPost,
+      { returnOriginal: false, runValidators: true }
+    );
+    if (!post)
+      res.status(500).json({
+        responseTime: new Date().toISOString(),
+        responseMessage: "Post not found / Unauthorized",
+        data: {},
+      });
+    else
+      res.json({
+        responseTime: new Date().toISOString(),
+        responseMessage: "updatePost successfully",
+        data: { post },
+      });
+  } catch (err) {
+    next(err);
+  }
 };
 
 /**
@@ -410,34 +409,34 @@ const updatePost = async (req, res, next) => {
  *        description: Server Error
  */
 const likePost = async (req, res, next) => {
-	try {
-		let post = await Post.findById(req.params.id);
-		if (!post) {
-			res.status(404).json({ err: "Post not found" });
-			return;
-		}
-		let like = await Like.findOne({
-			postId: req.params.id,
-			likedBy: req.user._id,
-		});
-		if (!like) {
-			like = new Like({ postId: req.params.id, likedBy: req.user._id });
-			await like.save();
-		}
-		await post.save();
-		res.json({
-			responseTime: new Date().toISOString(),
-			responseMessage: "likePost successfully",
-			data: { post },
-		});
-	} catch (err) {
-		res.status(401).json({
-			responseTime: new Date().toISOString(),
-			responseMessage: err,
-			data: null,
-		});
-		next(err);
-	}
+  try {
+    let post = await Post.findById(req.params.id);
+    if (!post) {
+      res.status(404).json({ err: "Post not found" });
+      return;
+    }
+    let like = await Like.findOne({
+      postId: req.params.id,
+      likedBy: req.user._id,
+    });
+    if (!like) {
+      like = new Like({ postId: req.params.id, likedBy: req.user._id });
+      await like.save();
+    }
+    await post.save();
+    res.json({
+      responseTime: new Date().toISOString(),
+      responseMessage: "likePost successfully",
+      data: { post },
+    });
+  } catch (err) {
+    res.status(401).json({
+      responseTime: new Date().toISOString(),
+      responseMessage: err,
+      data: null,
+    });
+    next(err);
+  }
 };
 
 /**
@@ -472,33 +471,33 @@ const likePost = async (req, res, next) => {
  */
 
 const unlikePost = async (req, res, next) => {
-	try {
-		let post = await Post.findById(req.params.id);
-		if (!post) {
-			res.status(404).json({ err: "Post not found" });
-			return;
-		}
-		let like = await Like.findOne({
-			postId: req.params.id,
-			likedBy: req.user._id,
-		});
-		if (like) {
-			await Like.deleteOne({ _id: like._id });
-		}
-		await post.save();
-		res.json({
-			responseTime: new Date().toISOString(),
-			responseMessage: "unlikePost successfully",
-			data: { post },
-		});
-	} catch (err) {
-		res.status(401).json({
-			responseTime: new Date().toISOString(),
-			responseMessage: err,
-			data: null,
-		});
-		next(err);
-	}
+  try {
+    let post = await Post.findById(req.params.id);
+    if (!post) {
+      res.status(404).json({ err: "Post not found" });
+      return;
+    }
+    let like = await Like.findOne({
+      postId: req.params.id,
+      likedBy: req.user._id,
+    });
+    if (like) {
+      await Like.deleteOne({ _id: like._id });
+    }
+    await post.save();
+    res.json({
+      responseTime: new Date().toISOString(),
+      responseMessage: "unlikePost successfully",
+      data: { post },
+    });
+  } catch (err) {
+    res.status(401).json({
+      responseTime: new Date().toISOString(),
+      responseMessage: err,
+      data: null,
+    });
+    next(err);
+  }
 };
 
 /**
@@ -543,57 +542,57 @@ const unlikePost = async (req, res, next) => {
  *        description: Server Error
  */
 const createComment = async (req, res, next) => {
-	try {
-		let post = await Post.findById(req.params.id);
-		if (!post) {
-			res.status(401).json({
-				responseTime: new Date().toISOString(),
-				responseMessage: "Post not found",
-				data: null,
-			});
-			return;
-		}
-		let repliedTo = req.query.repliedTo || undefined;
-		let rplyComment = await Comment.findById(repliedTo);
-		if (
-			(repliedTo && !rplyComment) ||
-			(repliedTo && rplyComment.postId.equals(req.params.id) === false)
-		) {
-			res.status(401).json({
-				responseTime: new Date().toISOString(),
-				responseMessage: "Comment not found",
-				data: null,
-			});
-			return;
-		}
-		let comment = new Comment({
-			...req.body,
-			repliedTo: repliedTo,
-			postId: req.params.id,
-			userId: req.user._id,
-			replyCount: 0,
-		});
+  try {
+    let post = await Post.findById(req.params.id);
+    if (!post) {
+      res.status(401).json({
+        responseTime: new Date().toISOString(),
+        responseMessage: "Post not found",
+        data: null,
+      });
+      return;
+    }
+    let repliedTo = req.query.repliedTo || undefined;
+    let rplyComment = await Comment.findById(repliedTo);
+    if (
+      (repliedTo && !rplyComment) ||
+      (repliedTo && rplyComment.postId.equals(req.params.id) === false)
+    ) {
+      res.status(401).json({
+        responseTime: new Date().toISOString(),
+        responseMessage: "Comment not found",
+        data: null,
+      });
+      return;
+    }
+    let comment = new Comment({
+      ...req.body,
+      repliedTo: repliedTo,
+      postId: req.params.id,
+      userId: req.user._id,
+      replyCount: 0,
+    });
 
-		await comment.save();
-		await post.save();
-		res.json({
-			responseTime: new Date().toISOString(),
-			responseMessage: "createComment successfully",
-			data: { comment },
-		});
-		if (repliedTo) {
-			rplyComment.replyCount++;
-			await rplyComment.save();
-		}
-	} catch (err) {
-		res.status(401).json({
-			responseTime: new Date().toISOString(),
-			responseMessage: err,
-			data: null,
-		});
-		console.log(err);
-		next(err);
-	}
+    await comment.save();
+    await post.save();
+    res.json({
+      responseTime: new Date().toISOString(),
+      responseMessage: "createComment successfully",
+      data: { comment },
+    });
+    if (repliedTo) {
+      rplyComment.replyCount++;
+      await rplyComment.save();
+    }
+  } catch (err) {
+    res.status(401).json({
+      responseTime: new Date().toISOString(),
+      responseMessage: err,
+      data: null,
+    });
+    console.log(err);
+    next(err);
+  }
 };
 
 /**
@@ -624,18 +623,18 @@ const createComment = async (req, res, next) => {
  *        description: Server Error
  */
 const getLikedPosts = async (req, res, next) => {
-	try {
-		let likedPosts = (await Like.find({ likedBy: req.user._id })).map(
-			(x) => x.postId
-		);
-		res.json({
-			responseTime: new Date().toISOString(),
-			responseMessage: "getLikedPosts successfully",
-			data: { likedPosts },
-		});
-	} catch (err) {
-		next(err);
-	}
+  try {
+    let likedPosts = (await Like.find({ likedBy: req.user._id })).map(
+      (x) => x.postId
+    );
+    res.json({
+      responseTime: new Date().toISOString(),
+      responseMessage: "getLikedPosts successfully",
+      data: { likedPosts },
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 /**
@@ -663,6 +662,12 @@ const getLikedPosts = async (req, res, next) => {
  *        schema:
  *          type: number
  *          default: 0
+ *      - in: query
+ *        name: search
+ *        required: false
+ *        schema:
+ *          type: string
+ *        description: Search term to filter posts by title/description/etc.
  *
  *    responses:
  *      200:
@@ -694,14 +699,25 @@ const getFeed = async (req, res, next) => {
     let limit = parseInt(req.query.limit) || 25;
     let skip = parseInt(req.query.skip) || 0;
 
+    const search = req.query.search;
+    let filter = {};
+
+    if (search) {
+      filter.$or = [
+        { title: { $regex: search, $options: "i" } },
+        { description: { $regex: search, $options: "i" } },
+        { ingredients: { $regex: search, $options: "i" } },
+      ];
+    }
+
     // Fetch posts
     let posts = [
-      ...(await Post.find({ tier: null })
+      ...(await Post.find({ tier: null, ...filter })
         .sort({ date: -1 })
         .limit(Math.ceil(limit / 2))
         .skip(Math.floor(skip / 2))
         .populate("creator")),
-      ...(await Post.find({ tier: { $ne: null } })
+      ...(await Post.find({ tier: { $ne: null }, ...filter })
         .sort({ date: -1 })
         .limit(Math.floor(limit / 2))
         .skip(Math.floor(skip / 2))
@@ -709,26 +725,30 @@ const getFeed = async (req, res, next) => {
     ];
 
     // Convert to plain objects
-    posts = posts.map(p => p.toObject());
+    posts = posts.map((p) => p.toObject());
 
     // Collect postIds
-    const postIds = posts.map(p => p._id);
+    const postIds = posts.map((p) => p._id);
 
     // Bulk counts
     const likeCounts = await Like.aggregate([
       { $match: { postId: { $in: postIds } } },
-      { $group: { _id: "$postId", count: { $sum: 1 } } }
+      { $group: { _id: "$postId", count: { $sum: 1 } } },
     ]);
     const commentCounts = await Comment.aggregate([
       { $match: { postId: { $in: postIds } } },
-      { $group: { _id: "$postId", count: { $sum: 1 } } }
+      { $group: { _id: "$postId", count: { $sum: 1 } } },
     ]);
 
-    const likeCountMap = Object.fromEntries(likeCounts.map(l => [l._id.toString(), l.count]));
-    const commentCountMap = Object.fromEntries(commentCounts.map(c => [c._id.toString(), c.count]));
+    const likeCountMap = Object.fromEntries(
+      likeCounts.map((l) => [l._id.toString(), l.count])
+    );
+    const commentCountMap = Object.fromEntries(
+      commentCounts.map((c) => [c._id.toString(), c.count])
+    );
 
     // Shape response
-    const result = posts.map(post => {
+    const result = posts.map((post) => {
       let user = post.creator;
       post.creator = user._id;
 
@@ -755,7 +775,6 @@ const getFeed = async (req, res, next) => {
     next(err);
   }
 };
-
 
 /**
  *
@@ -806,38 +825,38 @@ const getFeed = async (req, res, next) => {
  *                    type: string
  */
 const getComments = async (req, res, next) => {
-	try {
-		let skip = req.query.skip || 0;
-		let limit = req.query.limit || 25;
-		let comments = await Comment.find({
-			postId: req.params.id,
-			repliedTo: { $eq: null },
-		})
-			.limit(limit)
-			.skip(skip)
-			.populate("userId");
-		comments = comments
-			.map((comment) => comment.toObject())
-			.map((comment) => {
-				let ret = comment;
-				let user = comment.userId;
-				comment.userId = user._id;
-				return {
-					comment: ret,
-					userHandle: user.handle,
-					userProfilePicture: user.profilePicture,
-					userRole: user.role,
-				};
-			});
-		res.json({
-			responseTime: new Date().toISOString(),
-			responseMessage: "getComments successfully",
-			data: { comments },
-		});
-	} catch (err) {
-		console.log(err);
-		next(err);
-	}
+  try {
+    let skip = req.query.skip || 0;
+    let limit = req.query.limit || 25;
+    let comments = await Comment.find({
+      postId: req.params.id,
+      repliedTo: { $eq: null },
+    })
+      .limit(limit)
+      .skip(skip)
+      .populate("userId");
+    comments = comments
+      .map((comment) => comment.toObject())
+      .map((comment) => {
+        let ret = comment;
+        let user = comment.userId;
+        comment.userId = user._id;
+        return {
+          comment: ret,
+          userHandle: user.handle,
+          userProfilePicture: user.profilePicture,
+          userRole: user.role,
+        };
+      });
+    res.json({
+      responseTime: new Date().toISOString(),
+      responseMessage: "getComments successfully",
+      data: { comments },
+    });
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
 };
 
 /**
@@ -894,35 +913,35 @@ const getComments = async (req, res, next) => {
  *                    type: string
  */
 const getReplies = async (req, res, next) => {
-	try {
-		let skip = req.query.skip || 0;
-		let limit = req.query.limit || 25;
-		let comments = await Comment.find({ repliedTo: req.params.commId })
-			.skip(skip)
-			.limit(limit)
-			.populate("userId");
+  try {
+    let skip = req.query.skip || 0;
+    let limit = req.query.limit || 25;
+    let comments = await Comment.find({ repliedTo: req.params.commId })
+      .skip(skip)
+      .limit(limit)
+      .populate("userId");
 
-		comments = comments
-			.map((comment) => comment.toObject())
-			.map((comment) => {
-				let ret = comment;
-				let user = comment.userId;
-				comment.userId = user._id;
-				return {
-					comment: ret,
-					userHandle: user.handle,
-					userProfilePicture: user.profilePicture,
-					userRole: user.role,
-				};
-			});
-		res.json({
-			responseTime: new Date().toISOString(),
-			responseMessage: "getReplies successfully ",
-			data: { comments },
-		});
-	} catch (err) {
-		next(err);
-	}
+    comments = comments
+      .map((comment) => comment.toObject())
+      .map((comment) => {
+        let ret = comment;
+        let user = comment.userId;
+        comment.userId = user._id;
+        return {
+          comment: ret,
+          userHandle: user.handle,
+          userProfilePicture: user.profilePicture,
+          userRole: user.role,
+        };
+      });
+    res.json({
+      responseTime: new Date().toISOString(),
+      responseMessage: "getReplies successfully ",
+      data: { comments },
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 router.get("/feed", getFeed);
