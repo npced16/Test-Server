@@ -2,7 +2,7 @@
   {
     "title": "Avocado Toast",
     "description": "Classic avocado toast with olive oil and sesame seeds.",
-    "type": "Meal",
+    "type": "Normal",
     "meal": {
       "title": "Avocado Toast",
       "description": "Crispy toast topped with mashed avocado, olive oil, and sesame seeds.",
@@ -37,7 +37,7 @@
   {
     "title": "Banana Protein Smoothie",
     "description": "Banana, almond milk, and protein powder shake.",
-    "type": "Meal",
+    "type": "Program",
     "meal": {
       "title": "Banana Protein Smoothie",
       "description": "Creamy smoothie perfect for post-workout recovery.",
@@ -69,7 +69,7 @@
   {
     "title": "Grilled Chicken Salad",
     "description": "Chicken breast with fresh greens and vinaigrette.",
-    "type": "Meal",
+    "type": "Workout",
     "meal": {
       "title": "Grilled Chicken Salad",
       "description": "Light and filling salad with lean chicken and mixed greens.",
@@ -102,7 +102,7 @@
   {
     "title": "Oatmeal Bowl",
     "description": "Warm oatmeal with fruits and nuts.",
-    "type": "Meal",
+    "type": "Recipe",
     "meal": {
       "title": "Oatmeal Bowl",
       "description": "Hearty oats cooked with milk, topped with fresh fruit and nuts.",
@@ -135,7 +135,7 @@
   {
     "title": "Veggie Stir Fry",
     "description": "Colorful vegetables sautéed with soy sauce.",
-    "type": "Meal",
+    "type": "Recipe",
     "meal": {
       "title": "Veggie Stir Fry",
       "description": "Quick stir fry with mixed vegetables and soy sauce.",
@@ -167,7 +167,7 @@
   {
     "title": "Turkey g",
     "description": "Whole wheat g with turkey and veggies.",
-    "type": "Meal",
+    "type": "Recipe",
     "meal": {
       "title": "Turkey g",
       "description": "Nutritious g packed with lean turkey and greens.",
@@ -198,7 +198,7 @@
   {
     "title": "Salmon with Quinoa",
     "description": "Grilled salmon served with quinoa and asparagus.",
-    "type": "Meal",
+    "type": "Recipe",
     "meal": {
       "title": "Salmon with Quinoa",
       "description": "High-protein salmon dish with quinoa and asparagus.",
@@ -231,7 +231,7 @@
   {
     "title": "Greek Yogurt Parfait",
     "description": "Layered yogurt with granola and berries.",
-    "type": "Meal",
+    "type": "Recipe",
     "meal": {
       "title": "Greek Yogurt Parfait",
       "description": "Refreshing parfait with yogurt, granola, and fruit.",
@@ -262,7 +262,7 @@
   {
     "title": "Egg Fried Rice",
     "description": "Simple fried rice with eggs and peas.",
-    "type": "Meal",
+    "type": "Recipe",
     "meal": {
       "title": "Egg Fried Rice",
       "description": "Quick fried rice with scrambled eggs and peas.",
@@ -294,7 +294,7 @@
   {
     "title": "Chia Pudding",
     "description": "Chia seeds soaked in almond milk with fruit topping.",
-    "type": "Meal",
+    "type": "Recipe",
     "meal": {
       "title": "Chia Pudding",
       "description": "Overnight chia pudding topped with fresh fruit.",
