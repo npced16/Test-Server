@@ -41,7 +41,7 @@ const dietaryOptions = [
 	"Egg Free",
 ];
 
-const mealTypes = ["Breakfast", "Lunch", "Dinner", "Snack"];
+const mealTypes = ["Breakfast", "Lunch", "Dinner", "Snack", "Program", "Workout", "Recipe"];
 
 const mealPrep = [
 	"No-Bake",

@@ -32,7 +32,7 @@ const PostSchema = new Schema(
 		},
 		type: {
 			type: String,
-			enum: ["Normal", "Meal", "MealPlan", "Workout", "Recipe", "Programme"],
+			enum: ["Breakfast", "Normal", "Dinner", "Snack", "Program", "Workout", "Recipe"],
 			// enum: ["Normal", "Meal", "MealPlan", "Workout", "Recipe", "Programme"],
 			default: "Normal",
 		},
